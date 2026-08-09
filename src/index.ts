@@ -26,12 +26,20 @@ type BaseChecklyConfigOptions = {
   runLocation?: keyof Region;
 };
 
+type BaseChecklyConfigResult = Pick<
+  ChecklyConfig,
+  "projectName" | "logicalId" | "repoUrl"
+> & {
+  checks: Partial<ChecklyConfig["checks"]>;
+  cli: Partial<ChecklyConfig["cli"]>;
+};
+
 export function baseChecklyConfig({
   projectName,
   logicalId,
   repoUrl,
   runLocation = "us-east-1",
-}: BaseChecklyConfigOptions): Partial<ChecklyConfig> {
+}: BaseChecklyConfigOptions): BaseChecklyConfigResult {
   return {
     projectName,
     logicalId,
