@@ -1,4 +1,4 @@
-import type { Region } from "checkly";
+import type { ChecklyConfig, Region } from "checkly";
 import {
   AlertChannel,
   AlertEscalationBuilder,
@@ -31,7 +31,7 @@ export function baseChecklyConfig({
   logicalId,
   repoUrl,
   runLocation = "us-east-1",
-}: BaseChecklyConfigOptions) {
+}: BaseChecklyConfigOptions): Partial<ChecklyConfig> {
   return {
     projectName,
     logicalId,
