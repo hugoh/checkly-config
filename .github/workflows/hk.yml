@@ -1,0 +1,32 @@
+---
+name: hk
+
+permissions: {}
+
+on: # yamllint disable-line rule:truthy
+  push:
+    branches:
+      - main
+      - renovate/**
+  pull_request:
+
+jobs:
+  lint:
+    timeout-minutes: 5
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.event.pull_request.number ||
+        github.ref }}
+      cancel-in-progress: true
+    permissions:
+      contents: read
+      packages: read
+      # To report GitHub Actions status checks
+      statuses: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: hugoh/gh-workflows/setup@6b3318af9824bf310afc501232f53a99083296cd # v1.7.1
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - uses: hugoh/gh-workflows/hk-check@6b3318af9824bf310afc501232f53a99083296cd # v1.7.1
+        env:
+          PINACT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
