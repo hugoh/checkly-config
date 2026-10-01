@@ -6,9 +6,9 @@
   "main": "src/index.ts",
   "types": "src/index.ts",
   "peerDependencies": {
-    "checkly": "^8.0.0"
+    "checkly": "^8.0.0 || ^9.0.0"
   },
   "devDependencies": {
-    "checkly": "^8.19.0"
+    "checkly": "^9.5.0"
   }
 }
